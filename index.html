@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rifat Hossain | Professional Barista in Saudi Arabia</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'display': ['Playfair Display', 'serif'],
+                        'sans': ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        'coffee': {
+                            50: '#faf7f5',
+                            100: '#f0ebe6',
+                            200: '#ddd1c5',
+                            300: '#c4ab94',
+                            400: '#a8825f',
+                            500: '#8b6644',
+                            600: '#6f5238',
+                            700: '#5a422e',
+                            800: '#3d2d1f',
+                            900: '#2b1f15',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            background: linear-gradient(to bottom, #faf7f5, #f0ebe6);
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+        
+        nav {
+            backdrop-filter: blur(20px);
+            background: rgba(250, 247, 245, 0.95);
+            border-bottom: 1px solid rgba(139, 102, 68, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .hero-overlay {
+            background: linear-gradient(135deg, rgba(43, 31, 21, 0.75), rgba(111, 82, 56, 0.65));
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #2b1f15 0%, #8b6644 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .section-title {
+            font-size: clamp(2.8rem, 7vw, 4.8rem);
+            line-height: 1.05;
+        }
+        
+        .card-hover {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 25px 50px -12px rgba(139, 102, 68, 0.25);
+        }
+        
+        .skill-card {
+            transition: all 0.5s ease;
+        }
+        
+        .skill-card:hover {
+            background: linear-gradient(135deg, #8b6644, #6f5238);
+            color: white;
+            transform: translateY(-8px) scale(1.03);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #8b6644, #6f5238);
+            box-shadow: 0 10px 25px rgba(139, 102, 68, 0.3);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 35px rgba(139, 102, 68, 0.4);
+        }
+        
+        .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 55px;
+            height: 55px;
+            background: linear-gradient(135deg, #8b6644, #6f5238);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            z-index: 1000;
+            box-shadow: 0 10px 30px rgba(139, 102, 68, 0.4);
+        }
+        
+        .scroll-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed top-0 w-full z-50">
+        <div class="max-w-7xl mx-auto px-6 py-5">
+            <div class="flex justify-between items-center">
+                <a href="#" class="font-display text-3xl font-bold text-coffee-900 tracking-tight">Rifat Hossain</a>
+                
+                <div class="hidden md:flex items-center space-x-10 text-sm font-medium">
+                    <a href="#home" class="text-coffee-800 hover:text-coffee-600 transition-colors">Home</a>
+                    <a href="#about" class="text-coffee-800 hover:text-coffee-600 transition-colors">About</a>
+                    <a href="#skills" class="text-coffee-800 hover:text-coffee-600 transition-colors">Skills</a>
+                    <a href="#gallery" class="text-coffee-800 hover:text-coffee-600 transition-colors">Gallery</a>
+                    <a href="#contact" class="text-coffee-800 hover:text-coffee-600 transition-colors">Contact</a>
+                </div>
+                
+                <button id="mobileMenuBtn" class="md:hidden text-3xl text-coffee-800">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center justify-center relative">
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1511920170033-f8396924c348?w=1920&q=80" 
+                 alt="Coffee Shop Background" 
+                 class="w-full h-full object-cover">
+            <div class="hero-overlay absolute inset-0"></div>
+        </div>
+        
+        <div class="relative z-10 max-w-5xl mx-auto px-6 text-center text-white pt-20">
+            <div class="mb-10">
+                <!-- তোমার Profile.png এখানে যোগ করা আছে -->
+                <img src="https://raw.githubusercontent.com/Mahmodul93/Rifat-Hossain-/main/Profile.png" 
+                     alt="Rifat Hossain - Barista" 
+                     class="w-44 h-44 md:w-52 md:h-52 rounded-full mx-auto border-8 border-white/90 shadow-2xl object-cover">
+            </div>
+            
+            <h1 class="font-display text-6xl md:text-7xl lg:text-8xl font-bold leading-none mb-6">
+                Crafting Coffee,<br>Creating Moments
+            </h1>
+            
+            <p class="text-2xl md:text-3xl font-light mb-8 max-w-2xl mx-auto">
+                Professional Barista in Saudi Arabia
+            </p>
+            
+            <div class="flex justify-center">
+                <a href="https://www.facebook.com/share/1BLmE5ZYeR/" target="_blank" 
+                   class="border-2 border-white hover:bg-white hover:text-coffee-900 text-white px-10 py-4 rounded-full text-lg font-semibold transition-all flex items-center gap-3">
+                    <i class="fab fa-facebook-f"></i> Visit Facebook Profile
+                </a>
+            </div>
+        </div>
+
+        <div class="absolute bottom-10 left-1/2 -translate-x-1/2 text-white/70 animate-bounce">
+            <i class="fas fa-chevron-down text-4xl"></i>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-28 px-6">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="section-title gradient-text font-display font-bold">My Story</h2>
+            </div>
+            
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div>
+                    <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=800&q=80" 
+                         alt="Barista at work" 
+                         class="rounded-3xl shadow-2xl w-full">
+                </div>
+                
+                <div class="space-y-8 text-lg text-coffee-700 leading-relaxed">
+                    <p>Working as a barista in Saudi Arabia is not just my job — it's my passion. Every morning I start with fresh beans, precise measurements, and the desire to create something special for every customer.</p>
+                    <p>I specialize in espresso-based drinks, beautiful latte art, and delivering warm hospitality that makes people feel at home.</p>
+                    <p>In the vibrant coffee culture of Saudi Arabia, I blend modern techniques with traditional Arabic warmth to serve not just coffee, but memorable experiences.</p>
+                    
+                    <div class="bg-coffee-50 border-l-4 border-coffee-600 p-8 rounded-r-3xl italic text-coffee-800">
+                        "প্রতিদিন কফির কাপে শুধু স্বাদ না, মানুষের সাথে সম্পর্কও তৈরি করি।"
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-28 px-6 bg-coffee-50">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="section-title gradient-text font-display font-bold">My Expertise</h2>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="skill-card bg-white p-10 rounded-3xl text-center border border-coffee-100 hover:border-coffee-300">
+                    <div class="text-7xl text-coffee-600 mb-6"><i class="fas fa-coffee"></i></div>
+                    <h3 class="font-display text-2xl font-semibold mb-3">Espresso Mastery</h3>
+                    <p class="text-coffee-600">Perfect extraction and rich crema every time</p>
+                </div>
+                
+                <div class="skill-card bg-white p-10 rounded-3xl text-center border border-coffee-100 hover:border-coffee-300">
+                    <div class="text-7xl text-coffee-600 mb-6"><i class="fas fa-heart"></i></div>
+                    <h3 class="font-display text-2xl font-semibold mb-3">Latte Art</h3>
+                    <p class="text-coffee-600">Rosetta, heart, tulip & free pour designs</p>
+                </div>
+                
+                <div class="skill-card bg-white p-10 rounded-3xl text-center border border-coffee-100 hover:border-coffee-300">
+                    <div class="text-7xl text-coffee-600 mb-6"><i class="fas fa-users"></i></div>
+                    <h3 class="font-display text-2xl font-semibold mb-3">Hospitality</h3>
+                    <p class="text-coffee-600">Warm service & memorable customer experience</p>
+                </div>
+                
+                <div class="skill-card bg-white p-10 rounded-3xl text-center border border-coffee-100 hover:border-coffee-300">
+                    <div class="text-7xl text-coffee-600 mb-6"><i class="fas fa-star"></i></div>
+                    <h3 class="font-display text-2xl font-semibold mb-3">Presentation</h3>
+                    <p class="text-coffee-600">Every cup is served as a piece of art</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- What I Offer -->
+    <section class="py-28 px-6">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="section-title gradient-text font-display font-bold">What I Offer</h2>
+            </div>
+            
+            <div class="grid lg:grid-cols-3 gap-10">
+                <div class="card-hover bg-white p-10 rounded-3xl shadow-sm border border-coffee-100">
+                    <div class="text-6xl mb-6 text-coffee-600"><i class="fas fa-mug-hot"></i></div>
+                    <h3 class="font-display text-3xl font-bold mb-4">Coffee Mastery</h3>
+                    <p class="text-coffee-700">From bean to cup — precision in every drink.</p>
+                </div>
+                
+                <div class="card-hover bg-white p-10 rounded-3xl shadow-sm border border-coffee-100">
+                    <div class="text-6xl mb-6 text-coffee-600"><i class="fas fa-palette"></i></div>
+                    <h3 class="font-display text-3xl font-bold mb-4">Latte Art</h3>
+                    <p class="text-coffee-700">Beautiful designs that make your coffee look special.</p>
+                </div>
+                
+                <div class="card-hover bg-white p-10 rounded-3xl shadow-sm border border-coffee-100">
+                    <div class="text-6xl mb-6 text-coffee-600"><i class="fas fa-handshake"></i></div>
+                    <h3 class="font-display text-3xl font-bold mb-4">Personal Touch</h3>
+                    <p class="text-coffee-700">I remember your preferences and serve with care.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-28 bg-coffee-900 text-white">
+        <div class="max-w-4xl mx-auto px-6 text-center">
+            <h2 class="text-5xl font-display font-bold mb-8">Let's Have a Coffee Together</h2>
+            <p class="text-xl mb-10 text-coffee-200">Available for private events, workshops or friendly chat.</p>
+            
+            <div class="flex flex-col sm:flex-row gap-6 justify-center items-center">
+                <a href="tel:0566868083" class="btn-primary text-white px-12 py-5 rounded-full text-xl font-semibold flex items-center gap-3">
+                    <i class="fas fa-phone"></i> Call Now: 056 686 8083
+                </a>
+                <a href="https://www.facebook.com/share/1BLmE5ZYeR/" target="_blank" 
+                   class="border-2 border-white px-12 py-5 rounded-full text-xl font-semibold hover:bg-white hover:text-coffee-900 transition">
+                    <i class="fab fa-facebook"></i> Connect on Facebook
+                </a>
+            </div>
+            
+            <p class="mt-16 text-coffee-400 text-sm">
+                © 2026 Rifat Hossain • Professional Barista in Saudi Arabia
+            </p>
+        </div>
+    </section>
+
+    <!-- Scroll to Top -->
+    <div id="scrollTop" class="scroll-top">
+        <i class="fas fa-arrow-up text-xl"></i>
+    </div>
+
+    <script>
+        const scrollTop = document.getElementById('scrollTop');
+        window.addEventListener('scroll', () => {
+            scrollTop.classList.toggle('visible', window.scrollY > 600);
+        });
+        scrollTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>
