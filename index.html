@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rifat Hossain - Barista | Crafting Coffee, Creating Moments</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'display': ['Playfair Display', 'serif'],
+                        'sans': ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        'coffee': {
+                            50: '#faf7f5',
+                            100: '#f0ebe6',
+                            200: '#ddd1c5',
+                            300: '#c4ab94',
+                            400: '#a8825f',
+                            500: '#8b6644',
+                            600: '#6f5238',
+                            700: '#5a422e',
+                            800: '#3d2d1f',
+                            900: '#2b1f15',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: linear-gradient(to bottom, #faf7f5, #f0ebe6);
+            overflow-x: hidden;
+        }
+        
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f0ebe6;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(to bottom, #8b6644, #6f5238);
+            border-radius: 10px;
+        }
+        
+        nav {
+            backdrop-filter: blur(20px);
+            background: rgba(250, 247, 245, 0.95);
+            border-bottom: 1px solid rgba(139, 102, 68, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        nav.scrolled {
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.08);
+        }
+        
+        .hero-overlay {
+            background: linear-gradient(135deg, rgba(43, 31, 21, 0.7), rgba(111, 82, 56, 0.6));
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #2b1f15 0%, #8b6644 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .card-hover {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 25px 50px rgba(139, 102, 68, 0.2);
+        }
+        
+        .skill-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(139, 102, 68, 0.15);
+            transition: all 0.5s ease;
+        }
+        
+        .skill-card:hover {
+            background: linear-gradient(135deg, #8b6644, #6f5238);
+            color: white;
+            border-color: #8b6644;
+            transform: scale(1.05);
+        }
+        
+        .skill-card:hover .skill-icon {
+            color: white;
+            transform: rotateY(360deg);
+        }
+        
+        .skill-icon {
+            transition: all 0.6s ease;
+        }
+        
+        .gallery-item {
+            overflow: hidden;
+            border-radius: 16px;
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .gallery-item img {
+            transition: transform 0.6s ease;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.15);
+        }
+        
+        .gallery-item::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(43, 31, 21, 0.7), transparent);
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+        
+        .gallery-item:hover::after {
+            opacity: 1;
+        }
+        
+        .scroll-top {
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #8b6644, #6f5238);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            z-index: 1000;
+            box-shadow: 0 8px 24px rgba(139, 102, 68, 0.4);
+        }
+        
+        .scroll-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .scroll-top:hover {
+            transform: translateY(-8px) scale(1.1);
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .fade-in-up {
+            animation: fadeInUp 0.8s ease-out;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .floating {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #8b6644, #6f5238);
+            color: white;
+            padding: 14px 32px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: inline-block;
+            text-decoration: none;
+            box-shadow: 0 8px 20px rgba(139, 102, 68, 0.3);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 28px rgba(139, 102, 68, 0.4);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            padding: 14px 32px;
+            border: 2px solid white;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: inline-block;
+            text-decoration: none;
+        }
+        
+        .btn-secondary:hover {
+            background: white;
+            color: #2b1f15;
+        }
+        
+        input, textarea {
+            background: rgba(255, 255, 255, 0.9);
+            border: 2px solid rgba(139, 102, 68, 0.2);
+            padding: 14px 20px;
+            border-radius: 12px;
+            width: 100%;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.3s;
+        }
+        
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: #8b6644;
+            box-shadow: 0 0 0 4px rgba(139, 102, 68, 0.1);
+        }
+        
+        .section-title {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            line-height: 1.1;
+        }
+        
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 80%;
+            max-width: 400px;
+            height: 100vh;
+            background: rgba(250, 247, 245, 0.98);
+            backdrop-filter: blur(20px);
+            padding: 80px 40px;
+            transition: right 0.4s ease;
+            z-index: 999;
+            box-shadow: -10px 0 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .mobile-menu.active {
+            right: 0;
+        }
+        
+        .menu-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.6);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            z-index: 998;
+        }
+        
+        .menu-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .bangla {
+            font-family: 'SolaimanLipi', 'Kalpurush', 'Nikosh', serif;
+            line-height: 1.8;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed top-0 w-full z-50">
+        <div class="max-w-7xl mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <a href="#" class="font-display text-2xl md:text-3xl font-bold text-coffee-900">Rifat Hossain</a>
+                
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#home" class="font-sans text-sm font-medium text-coffee-800 hover:text-coffee-600 transition-colors">Home</a>
+                    <a href="#about" class="font-sans text-sm font-medium text-coffee-800 hover:text-coffee-600 transition-colors">About</a>
+                    <a href="#skills" class="font-sans text-sm font-medium text-coffee-800 hover:text-coffee-600 transition-colors">Skills</a>
+                    <a href="#gallery" class="font-sans text-sm font-medium text-coffee-800 hover:text-coffee-600 transition-colors">Gallery</a>
+                    <a href="#contact" class="font-sans text-sm font-medium text-coffee-800 hover:text-coffee-600 transition-colors">Contact</a>
+                </div>
+                
+                <button id="mobileMenuBtn" class="md:hidden text-coffee-800 text-2xl">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="menuOverlay" class="menu-overlay"></div>
+    <div id="mobileMenu" class="mobile-menu">
+        <button id="closeMenu" class="absolute top-8 right-8 text-coffee-800 text-3xl">
+            <i class="fas fa-times"></i>
+        </button>
+        <div class="flex flex-col space-y-8">
+            <a href="#home" class="mobile-link font-sans text-2xl font-semibold text-coffee-800">Home</a>
+            <a href="#about" class="mobile-link font-sans text-2xl font-semibold text-coffee-800">About</a>
+            <a href="#skills" class="mobile-link font-sans text-2xl font-semibold text-coffee-800">Skills</a>
+            <a href="#gallery" class="mobile-link font-sans text-2xl font-semibold text-coffee-800">Gallery</a>
+            <a href="#contact" class="mobile-link font-sans text-2xl font-semibold text-coffee-800">Contact</a>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center justify-center relative pt-20">
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1511920170033-f8396924c348?w=1920&q=80" alt="Coffee Background" class="w-full h-full object-cover">
+            <div class="hero-overlay absolute inset-0"></div>
+        </div>
+        
+        <div class="relative z-10 max-w-6xl mx-auto px-6 text-center text-white">
+            <div class="mb-8 fade-in-up">
+                <img src="Profile.png" alt="Rifat Hossain" class="w-40 h-40 rounded-full mx-auto border-4 border-white shadow-2xl object-cover">
+            </div>
+            
+            <h1 class="font-display text-5xl md:text-7xl lg:text-8xl font-bold mb-6 fade-in-up">
+                Crafting Coffee,<br/>Creating Moments
+            </h1>
+            
+            <p class="font-sans text-xl md:text-2xl mb-4 max-w-3xl mx-auto leading-relaxed fade-in-up" style="animation-delay: 0.2s;">
+                Every cup tells a story. Every customer becomes a memory.
+            </p>
+            
+            <p class="font-sans text-lg mb-12 max-w-2xl mx-auto opacity-90 fade-in-up" style="animation-delay: 0.4s;">
+                Passionate barista in Saudi Arabia, blending tradition with modern coffee culture
+            </p>
+            
+            <div class="flex flex-col sm:flex-row gap-5 justify-center items-center fade-in-up" style="animation-delay: 0.6s;">
+                <a href="https://www.facebook.com/share/1BLmE5ZYeR/" target="_blank" class="btn-primary">
+                    <i class="fab fa-facebook mr-2"></i>
+                    Facebook Profile
+                </a>
+            </div>
+        </div>
+        
+        <div class="absolute bottom-12 left-1/2 transform -translate-x-1/2 z-10 floating">
+            <i class="fas fa-chevron-down text-white text-3xl opacity-70"></i>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-24 px-6">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="section-title gradient-text font-display font-bold mb-6">My Story</h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-transparent via-coffee-600 to-transparent mx-auto"></div>
+            </div>
+            
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div>
+                    <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=800&q=80" alt="Coffee Culture" class="rounded-3xl shadow-2xl">
+                </div>
+                
+                <div class="space-y-6">
+                    <p class="font-sans text-lg text-coffee-700 leading-relaxed">
+                        Working as a barista in Saudi Arabia isn't just a job—it's a journey of passion, precision, and human connection. Every morning, as the first rays of sunlight touch the coffee shop windows, I begin my ritual: grinding beans, calibrating the espresso machine, and preparing for the symphony of aromas that will fill the air.
+                    </p>
+                    
+                    <p class="font-sans text-lg text-coffee-700 leading-relaxed">
+                        My daily life revolves around the art of coffee making. From the precise temperature of steamed milk to the delicate pour that creates beautiful latte art, every detail matters. I've learned that coffee is more than a beverage—it's a conversation starter, a moment of pause in someone's busy day, a small luxury that brings joy.
+                    </p>
+                    
+                    <p class="font-sans text-lg text-coffee-700 leading-relaxed">
+                        In this vibrant Saudi Arabian coffee culture, I've discovered the beautiful intersection of tradition and modernity. The warmth of Arabic hospitality blends seamlessly with contemporary coffee techniques. Each customer who walks through our doors brings a new story, a different energy, and I've become not just their barista, but a small part of their daily narrative.
+                    </p>
+                    
+                    <div class="bg-coffee-50 border-l-4 border-coffee-600 p-6 rounded-r-2xl">
+                        <p class="font-sans text-coffee-800 italic leading-loose bangla">
+                            "প্রতিদিন কফির কাপে শুধু স্বাদ না, মানুষের সাথে সম্পর্কও তৈরি করি।"
+                        </p>
+                    </div>
+                    
+                    <p class="font-sans text-lg text-coffee-700 leading-relaxed">
+                        What drives me is the passion for excellence and the genuine smiles I see when customers take that first sip. Whether it's a perfectly pulled espresso, a creamy cappuccino with intricate foam art, or a simple filter coffee brewed with care, I pour my heart into every cup. This is my craft, my art, and my daily meditation.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-24 px-6 bg-gradient-to-b from-coffee-50/50 to-transparent">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="section-title gradient-text font-display font-bold mb-6">My Expertise</h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-transparent via-coffee-600 to-transparent mx-auto"></div>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="skill-card p-8 rounded-3xl text-center">
+                    <div class="skill-icon text-6xl text-coffee-600 mb-6">
+                        <i class="fas fa-coffee"></i>
+                    </div>
+                    <h3 class="font-display text-2xl font-bold mb-3">Espresso Making</h3>
+                    <p class="font-sans text-sm opacity-80">Precision extraction, perfect crema, balanced flavor profiles</p>
+                </div>
+                
+                <div class="skill-card p-8 rounded-3xl text-center">
+                    <div class="skill-icon text-6xl text-coffee-600 mb-6">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3 class="font-display text-2xl font-bold mb-3">Latte Art</h3>
+                    <p class="font-sans text-sm opacity-80">Beautiful rosetta, heart, and tulip designs that amaze</p>
+                </div>
+                
+                <div class="skill-card p-8 rounded-3xl text-center">
+                    <div class="skill-icon text-6xl text-coffee-600 mb-6">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3 class="font-display text-2xl font-bold mb-3">Customer Service</h3>
+                    <p class="font-sans text-sm opacity-80">Warm hospitality, attentive listening, memorable experiences</p>
+                </div>
+                
+                <div class="skill-card p-8 rounded-3xl text-center">
+                    <div class="skill-icon text-6xl text-coffee-600 mb-6">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <h3 class="font-display text-2xl font-bold mb-3">Presentation</h3>
+                    <p class="font-sans text-sm opacity-80">Every cup served is a work of art and passion</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="py-24 px-6">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="section-title gradient-text font-display font-bold mb-6">What I Bring</h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-transparent via-coffee-600 to-transparent mx-auto"></div>
+            </div>
+            
+            <div class="grid lg:grid-cols-3 gap-10">
+                <div class="card-hover bg-white/80 backdrop-blur-sm p-10 rounded-3xl border border-coffee-200">
+                    <div class="text-5xl text-coffee-600 mb-6">
+                        <i class="fas fa-mug-hot"></i>
+                    </div>
+                    <h3 class="font-display text-3xl font-bold text-coffee-900 mb-4">Coffee Mastery</h3>
+                    <p class="font-sans text-coffee-700 leading-relaxed">
+                        Years of experience have taught me the nuances of coffee preparation—from bean selection to brewing temperature, from grind consistency to extraction timing. I understand the chemistry behind a perfect cup and the artistry needed to make it memorable. Whether it's a robust espresso, a velvety flat white, or a delicate pour-over, I approach each preparation with technical precision and creative flair.
+                    </p>
+                </div>
+                
+                <div class="card-hover bg-white/80 backdrop-blur-sm p-10 rounded-3xl border border-coffee-200">
+                    <div class="text-5xl text-coffee-600 mb-6">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h3 class="font-display text-3xl font-bold text-coffee-900 mb-4">Customer Connection</h3>
+                    <p class="font-sans text-coffee-700 leading-relaxed">
+                        In the service industry, technical skill is only half the equation. I pride myself on creating genuine connections with every customer. I remember regulars' orders, notice when someone needs a listening ear, and understand that sometimes people come for the conversation as much as the coffee. My friendly demeanor and attentive service turn first-time visitors into loyal customers who feel like family.
+                    </p>
+                </div>
+                
+                <div class="card-hover bg-white/80 backdrop-blur-sm p-10 rounded-3xl border border-coffee-200">
+                    <div class="text-5xl text-coffee-600 mb-6">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3 class="font-display text-3xl font-bold text-coffee-900 mb-4">Fast-Paced Excellence</h3>
+                    <p class="font-sans text-coffee-700 leading-relaxed">
+                        Working in a busy coffee shop environment has sharpened my ability to maintain quality under pressure. During morning rushes when orders pile up, I stay calm, efficient, and focused. I've mastered the art of multitasking—pulling shots, steaming milk, taking orders, and maintaining conversation—all while ensuring every cup meets the highest standards. Speed without compromising quality is my specialty.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="py-24 px-6 bg-gradient-to-b from-transparent via-coffee-50/30 to-transparent">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="section-title gradient-text font-display font-bold mb-6">Coffee Moments</h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-transparent via-coffee-600 to-transparent mx-auto"></div>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=600&q=80" alt="Espresso Making" class="w-full h-64 object-cover">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=600&q=80" alt="Latte Art" class="w-full h-64 object-cover">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1442512595331-e89e73853f31?w=600&q=80" alt="Coffee Shop" class="w-full h-64 object-cover">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=600&q=80" alt="Coffee Cup" class="w-full h-64 object-cover">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=600&q=80" alt="Cafe Interior" class="w-full h-64 object-cover">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=600&q=80" alt="Pouring Coffee" class="w-full h-64 object-cover">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1497935586351-b67a49e012bf?w=600&q=80" alt="Coffee Beans" class="w-full h-64 object-cover">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1511920170033-f8396924c348?w=600&q=80" alt="Barista Work" class="w-full h-64 object-cover">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section class="py-24 px-6">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="section-title gradient-text font-display font-bold mb-6">A Day in My Life</h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-transparent via-coffee-600 to-transparent mx-auto"></div>
+            </div>
+            
+            <div class="space-y-12">
+                <div class="grid lg:grid-cols-2 gap-12 items-center">
+                    <div class="order-2 lg:order-1">
+                        <h3 class="font-display text-4xl font-bold text-coffee-900 mb-6">Morning Ritual</h3>
+                        <p class="font-sans text-lg text-coffee-700 leading-relaxed mb-4">
+                            My day begins before sunrise. I arrive at the coffee shop while the city is still sleeping, and there's a sacred quality to these early hours. The first task is always the same: unlock the doors, flip on the lights, and let the space awaken. I start by grinding the first batch of beans—the sound is familiar, comforting, like a morning meditation.
+                        </p>
+                        <p class="font-sans text-lg text-coffee-700 leading-relaxed">
+                            As the espresso machine warms up, I prepare the workspace with meticulous care. Fresh milk is placed in the refrigerator, cups are arranged, syrups are organized. The aroma of freshly ground coffee begins to fill the air, rich and earthy, promising the delicious day ahead. By the time the first customer arrives, everything is perfect, and I'm ready to create magic.
+                        </p>
+                    </div>
+                    <div class="order-1 lg:order-2">
+                        <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=800&q=80" alt="Morning Coffee" class="rounded-3xl shadow-2xl">
+                    </div>
+                </div>
+                
+                <div class="grid lg:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <img src="https://images.unsplash.com/photo-1511920170033-f8396924c348?w=800&q=80" alt="Busy Hours" class="rounded-3xl shadow-2xl">
+                    </div>
+                    <div>
+                        <h3 class="font-display text-4xl font-bold text-coffee-900 mb-6">The Rush Hours</h3>
+                        <p class="font-sans text-lg text-coffee-700 leading-relaxed mb-4">
+                            Mid-morning brings the rush—a beautiful chaos of orders, conversations, and steam wands hissing. This is when my training truly shines. Muscle memory takes over as I work the espresso machine with precision, my hands moving in a practiced dance. Pull shot, steam milk, pour art, serve with a smile—all while maintaining eye contact and making small talk.
+                        </p>
+                        <p class="font-sans text-lg text-coffee-700 leading-relaxed">
+                            The coffee shop becomes a symphony during these hours. The espresso machine provides the bass line, the milk frother adds percussion, customer chatter creates melody. I'm conducting this orchestra, ensuring every element harmonizes. The warmth from the machine, the sweet-bitter aroma of espresso, the satisfied sighs of customers—these sensory moments make the pressure worthwhile.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="grid lg:grid-cols-2 gap-12 items-center">
+                    <div class="order-2 lg:order-1">
+                        <h3 class="font-display text-4xl font-bold text-coffee-900 mb-6">Evening Calm</h3>
+                        <p class="font-sans text-lg text-coffee-700 leading-relaxed mb-4">
+                            As the day winds down, the coffee shop transforms. The frantic energy mellows into something more intimate. Customers linger longer, conversations deepen. This is when I have time to perfect my latte art, to experiment with new techniques, to truly connect with the regulars who have become friends.
+                        </p>
+                        <p class="font-sans text-lg text-coffee-700 leading-relaxed">
+                            Closing time is my moment of reflection. As I clean the machines, wipe down counters, and prepare for tomorrow, I think about the smiles I've created, the conversations I've shared, the small moments of joy delivered in ceramic cups. The lingering smell of coffee in the air is a reminder that this isn't just work—it's a calling, a passion, a way of bringing beauty into people's everyday lives.
+                        </p>
+                    </div>
+                    <div class="order-1 lg:order-2">
+                        <img src="https://images.unsplash.com/photo-1442512595331-e89e73853f31?w=800&q=80" alt="Evening Coffee" class="rounded-3xl shadow-2xl">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-24 px-6 bg-gradient-to-b from-coffee-50/50 to-coffee-100/30">
+        <div class="max-w-5xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="section-title gradient-text font-display font-bold mb-6">Let's Connect</h2>
+                <p class="font-sans text-xl text-coffee-600 mb-8">
+                    Whether you're a coffee enthusiast, potential employer, or just want to chat about the art of coffee making, I'd love to hear from you.
+                </p>
+                <div class="w-24 h-1 bg-gradient-to-r from-transparent via-coffee-600 to-transparent mx-auto"></div>
+            </div>
+            
+            <div class="grid lg:grid-cols-2 gap-12">
+                <div class="bg-white/80 backdrop-blur-sm p-10 rounded-3xl border border-coffee-200">
+                    <h3 class="font-display text-3xl font-bold text-coffee-900 mb-6">Get in Touch</h3>
+                    
+                    <div class="space-y-6 mb-8">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 bg-coffee-600 rounded-full flex items-center justify-center text-white">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div>
+                                <p class="font-sans text-sm text-coffee-600 mb-1">Call Me</p>
+                                <a href="tel:0566868083" class="font-sans text-xl font-bold text-coffee-900 hover:text-coffee-600 transition-colors">0566868083</a>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 bg-coffee-600 rounded-full flex items-center justify-center text-white">
+                                <i class="fab fa-facebook"></i>
+                            </div>
+                            <div>
+                                <p class="font-sans text-sm text-coffee-600 mb-1">Facebook</p>
+                                <a href="https://www.facebook.com/share/1BLmE5ZYeR/" target="_blank" class="font-sans text-lg font-bold text-coffee-900 hover:text-coffee-600 transition-colors">Visit Profile</a>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 bg-coffee-600 rounded-full flex items-center justify-center text-white">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div>
+                                <p class="font-sans text-sm text-coffee-600 mb-1">Location</p>
+                                <p class="font-sans text-lg font-bold text-coffee-900">Najran, Saudi Arabia</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <p class="font-sans text-coffee-700 leading-relaxed italic">
+                        "I believe every conversation over coffee has the potential to brighten someone's day. Let's start ours."
+                    </p>
+                </div>
+                
+                <div class="bg-white/80 backdrop-blur-sm p-10 rounded-3xl border border-coffee-200">
+                    <h3 class="font-display text-3xl font-bold text-coffee-900 mb-6">Send a Message</h3>
+                    
+                    <form class="space-y-5">
+                        <div>
+                            <input type="text" placeholder="Your Name" required>
+                        </div>
+                        <div>
+                            <input type="email" placeholder="Your Email" required>
+                        </div>
+                        <div>
+                            <textarea rows="5" placeholder="Your Message" required></textarea>
+                        </div>
+                        <button type="submit" class="btn-primary w-full">
+                            <i class="fas fa-paper-plane mr-2"></i>
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 px-6 bg-coffee-900 text-white">
+        <div class="max-w-6xl mx-auto text-center">
+            <div class="font-display text-4xl font-bold mb-4">Rifat Hossain</div>
+            <p class="font-sans text-coffee-300 mb-6">Barista | Coffee Artisan | Creating Memorable Experiences</p>
+            <div class="flex justify-center space-x-6 mb-8">
+                <a href="tel:0566868083" class="text-coffee-400 hover:text-white transition-colors">
+                    <i class="fas fa-phone text-2xl"></i>
+                </a>
+                <a href="https://www.facebook.com/share/1BLmE5ZYeR/" target="_blank" class="text-coffee-400 hover:text-white transition-colors">
+                    <i class="fab fa-facebook text-2xl"></i>
+                </a>
+            </div>
+            <p class="font-sans text-coffee-500 text-sm">© 2024 Rifat Hossain. Crafted with passion and coffee.</p>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top -->
+    <div id="scrollTop" class="scroll-top">
+        <i class="fas fa-coffee text-2xl"></i>
+    </div>
+
+    <script>
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const menuOverlay = document.getElementById('menuOverlay');
+        const closeMenu = document.getElementById('closeMenu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.add('active');
+            menuOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+
+        const closeMobileMenu = () => {
+            mobileMenu.classList.remove('active');
+            menuOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        };
+
+        closeMenu.addEventListener('click', closeMobileMenu);
+        menuOverlay.addEventListener('click', closeMobileMenu);
+        mobileLinks.forEach(link => link.addEventListener('click', closeMobileMenu));
+
+        // Scroll to top
+        const scrollTop = document.getElementById('scrollTop');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 400) {
+                scrollTop.classList.add('visible');
+            } else {
+                scrollTop.classList.remove('visible');
+            }
+        });
+
+        scrollTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Form submission
+        document.querySelector('form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Thank you for your message! I will get back to you soon.');
+            e.target.reset();
+        });
+    </script>
+</body>
+</html>
